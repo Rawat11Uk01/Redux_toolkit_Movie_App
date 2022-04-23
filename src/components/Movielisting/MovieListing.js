@@ -10,13 +10,18 @@ const MovieListing = () => {
         <h3>{movies.Error
         }</h3>
     </div >);
-    console.log(movies);
-
+    // console.log(movies);
+// 
     let renderShows = '';
 
     const shows = useSelector(state => state.movie.shows);
-    console.log('hi', shows)
-    // renderShows = shows.Response === 'True' ? (shows.Search)
+  
+    renderShows = shows.Response === 'True' ? (shows.Search.map((show, index) => <MovieCard key={index} data={show} />)) : (<div className='shows-err'>
+        <h3>{shows.Error
+        }</h3>
+    </div >);
+    // console.log(shows);
+ 
     return (
         <div className='movie-wrapper'>
             <div className='movie-list'>
@@ -27,7 +32,7 @@ const MovieListing = () => {
             </div>
             <div className='show-list'>
                 <h2>shows</h2>
-                <div className='show-container'>
+                <div className='movie-container'>
                     {renderShows}
                 </div>
             </div>

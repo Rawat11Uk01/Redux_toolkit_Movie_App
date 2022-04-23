@@ -5,40 +5,47 @@ const movieText = 'Harry';
 
 
 
-export const fetchAsyncMovies = createAsyncThunk('movies/fetchAsyncMovies', async () => {
-  const movieText = 'Harry';
+export const fetchAsyncMovies = createAsyncThunk('movies/fetchAsyncMovies', async (term) => {
 
-  const response = await movieApi.get(`?apikey=${APIKEY}&s=${movieText}&type=movie`).catch((error) => console.log(error))
+
+  const response = await movieApi.get(`?apikey=${APIKEY}&s=${term}&type=movie`).catch((error) => console.log(error))
   // console.log(response.data.Search);
   return response.data;
 
 
 });
 
-export const fetchAsyncShows = createAsyncThunk('shows/fetchAsyncShows', async () => {
-  const showText = 'Friends';
+export const fetchAsyncShows = createAsyncThunk('shows/fetchAsyncShows', async (term) => {
+ 
 
-  const response = await movieApi.get(`?apikey=${APIKEY}&s=${showText}&type=series`).catch((error) => console.log(error))
+  const response = await movieApi.get(`?apikey=${APIKEY}&s=${term}&type=series`).catch((error) => console.log(error))
   // console.log(response.data.Search);
   return response.data;
 
 
+});
+
+export const fetchAsyncDetail = createAsyncThunk('detail/fetchAsyncDetail', async (id) => {
+  const response = await movieApi.get(`?apikey=${APIKEY}&i=${id}&Plot=full`).catch((error) => console.log(error))
+  // console.log(response.data.Search);
+  return response.data;
 });
 
 const initialState = {
   movies: {},
   shows: {},
+  selectMovieOrShow: {}
 }
 const movieSlice = createSlice({
   name: 'movies',
   initialState: initialState,
   reducers: {
-    addMovies(state, action) {
-      state.movies = action.payload;
-    },
-    // addshows(state, action) {
-    //   state.shows = action.payload;
-    // }
+    // addMovies(state, action) {
+    //   state.movies = action.payload;
+    // },
+    removeSelectedMovieOrShow(state, action) {
+      state.selectMovieOrShow = {};
+    }
   },
   extraReducers: {
     [fetchAsyncMovies.pending]: () => { console.log('pending') },
@@ -55,6 +62,10 @@ const movieSlice = createSlice({
     [fetchAsyncShows.fulfilled]: (state, { payload }) => {
       console.log('fetched successfully')
       return { ...state, shows: payload }
+    },
+    [fetchAsyncDetail.fulfilled]: (state, { payload }) => {
+      console.log('fetched successfully')
+      return { ...state, selectMovieOrShow: payload }
     },
   }
 })

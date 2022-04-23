@@ -10,9 +10,10 @@ const Home = () => {
 
 
     useEffect(() => {
-
-        dispatch(fetchAsyncMovies());
-        dispatch(fetchAsyncShows());
+const movieText = 'Harry';
+const shoeText = 'Friends';
+        dispatch(fetchAsyncMovies(movieText));
+        dispatch(fetchAsyncShows(shoeText));
     }, [dispatch])
 
     return (
