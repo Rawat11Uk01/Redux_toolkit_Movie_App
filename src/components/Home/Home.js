@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import MovieListing from '../Movielisting/MovieListing'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchAsyncMovies } from '../../features/movies/movieSlice';
+import { fetchAsyncMovies, fetchAsyncShows } from '../../features/movies/movieSlice';
 const Home = () => {
     const dispatch = useDispatch();
 
@@ -12,6 +12,7 @@ const Home = () => {
     useEffect(() => {
 
         dispatch(fetchAsyncMovies());
+        dispatch(fetchAsyncShows());
     }, [dispatch])
 
     return (
