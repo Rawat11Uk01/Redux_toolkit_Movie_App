@@ -1,3 +1,13 @@
+# Project Description
+
+A movie app using react toolkit & redux thunk for
+async operations
+
+# Project ScreenShots
+
+![Screenshot from 2022-04-23 17-07-01](https://user-images.githubusercontent.com/99875782/165360363-5bcba514-864b-4d66-af57-df11fc24548a.png)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
